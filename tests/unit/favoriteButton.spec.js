@@ -44,8 +44,6 @@ describe("FavoriteButton.vue", () => {
       store,
       localVue
     });
-
-		console.log(wrapper);
     // TODO: Fill in test for adding favorite.
   });
 
@@ -55,8 +53,6 @@ describe("FavoriteButton.vue", () => {
       store,
       localVue
     });
-
-		console.log(wrapper);
     // TODO: Fill in test for removing favorite.
   });
 });
