@@ -5,13 +5,26 @@
 
   	<ul class="movie-list">
   		<li v-for="movie in movies.results">
-  			<!-- TODO: All the content about the movie. -->
-  			<p class="rating">
-  				<span>Viewer Rating:</span># / 10
-  				<button v-if="!isFavorite(movie)" class="favorite" @click="addToFavorites(movie)">Add to favorites</button>
-  				<span v-else>Favorite! <a @click="true" class="remove_favorite">(UnFavorite)</a></span>
-  			</p>
-
+				<div>
+					<div class="left">
+						<img
+							:src="movie.poster_path"
+						/>
+					</div>
+					<div class="right"
+						:style="{'background-image': 'url(' + movie.backdrop_path + ')'}"
+					>
+						<div>{{movie.title}} {{movie.release_date}}</div>
+						<div>{{movie.genres}}</div>
+						<div>{{movie.overview}}</div>
+						<div>{{movie.backdrop_path}}</div>
+						<p class="rating">
+							<span>Viewer Rating:</span>{{movie.vote_average}} / 10
+							<button v-if="!isFavorite(movie)" class="favorite" @click="addToFavorites(movie)">Add to favorites</button>
+							<span v-else>Favorite! <a @click="true" class="remove_favorite">(UnFavorite)</a></span>
+						</p>
+					</div>
+				</div>
   		</li>
   	</ul>
   </div>
@@ -25,7 +38,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: "home",
   components: {
-    FavoriteButton
+		FavoriteButton
   },
   computed: mapState({
   	movies: state => state.movies,
@@ -44,4 +57,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.left {
+	display: inline-block;
+	width: 20%;
+	height: 120px;
+}
+.right {
+	display: inline-block;
+	width: 80%;
+}
+</style>
