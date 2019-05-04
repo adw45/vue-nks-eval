@@ -16,7 +16,7 @@ export default new Vuex.Store({
     },
     removeFavorite(state, movie) {
       state.favorites = state.favorites.filter(
-        tempMovie => tempMovie !== movie
+        tempMovie => tempMovie.id !== movie.id
       );
     }
   },
@@ -25,6 +25,7 @@ export default new Vuex.Store({
       commit("addFavorite", movie);
     },
     removeFavorite({ commit }, movie) {
+      console.log('removing', movie)
       commit("removeFavorite", movie);
     }
   }
