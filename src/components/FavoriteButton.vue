@@ -1,12 +1,13 @@
 <template>
     <button
-        v-if="!isFavorite(movie)"
         class="favorite"
+        v-if="!isFavorite(movie)"
         @click="addToFavorites(movie)"
     >
         Add to favorites
     </button>
-    <span v-else>Favorite!
+    <span v-else>
+        Favorite!
         <a @click="true" class="remove_favorite">(UnFavorite)</a>
     </span>
 </template>
