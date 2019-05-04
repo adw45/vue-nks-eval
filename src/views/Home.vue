@@ -14,7 +14,7 @@
             <div class="right"
                 :style="{'background-image': 'url(' + movie.backdrop_path + ')'}"
             >
-                <div>{{movie.title}} {{movie.release_date}}</div>
+                <div>{{movie.title}} {{movie.release_date | parseYear}}</div>
                 <div>{{movie.genres}}</div>
                 <div>{{movie.overview}}</div>
                 <div>{{movie.backdrop_path}}</div>
@@ -52,6 +52,11 @@ export default {
         },
         isFavorite: function ( movie ) {
             return this.favorites.filter(fave => fave.id == movie.id).length > 0;
+        }
+    },
+    filters: {
+        parseYear: (releaseDate) => {
+            return new Date(releaseDate).getFullYear();
         }
     }
 };
