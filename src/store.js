@@ -19,8 +19,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addFavorite({ commit, state }, movie) {
-      console.log(state);
+    addFavorite({ commit }, movie) {
       commit("addFavorite", movie);
     }
   }

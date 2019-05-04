@@ -18,11 +18,12 @@
                 <div>{{movie.genres}}</div>
                 <div>{{movie.overview}}</div>
                 <div>{{movie.backdrop_path}}</div>
+
                 <p class="rating">
-                <span>Viewer Rating:</span>{{movie.vote_average}} / 10
-                <button v-if="!isFavorite(movie)" class="favorite" @click="addToFavorites(movie)">Add to favorites</button>
-                <span v-else>Favorite! <a @click="true" class="remove_favorite">(UnFavorite)</a></span>
+                    <span>Viewer Rating:</span> {{movie.vote_average}} / 10
+                    <FavoriteButton :movie="movie"/>
                 </p>
+
             </div>
             </div>
         </li>
@@ -42,23 +43,7 @@ export default {
     },
     computed: mapState({
         movies: state => state.movies,
-        favorites: state => state.favorites
-    }),
-    methods: {
-        ...mapActions(['addFavorite']),
-        addToFavorites: function ( movie ) {
-            console.log('adding: ' + movie);
-            this.addFavorite(movie);
-        },
-        isFavorite: function ( movie ) {
-            return this.favorites.filter(fave => fave.id == movie.id).length > 0;
-        }
-    },
-    filters: {
-        parseYear: (releaseDate) => {
-            return new Date(releaseDate).getFullYear();
-        }
-    }
+    })
 };
 </script>
 
