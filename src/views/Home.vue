@@ -43,7 +43,12 @@ export default {
     },
     computed: mapState({
         movies: state => state.movies,
-    })
+    }),
+    filters: {
+        parseYear: (releaseDate) => {
+            return new Date(releaseDate).getFullYear();
+        }
+    }
 };
 </script>
 

@@ -15,12 +15,17 @@ export default new Vuex.Store({
       state.favorites.push(movie);
     },
     removeFavorite(state, movie) {
-      console.log(state, movie);
+      state.favorites = state.favorites.filter(
+        tempMovie => tempMovie !== movie
+      );
     }
   },
   actions: {
     addFavorite({ commit }, movie) {
       commit("addFavorite", movie);
+    },
+    removeFavorite({ commit }, movie) {
+      commit("removeFavorite", movie);
     }
   }
 });
