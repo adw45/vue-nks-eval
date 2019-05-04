@@ -25,7 +25,6 @@ export default new Vuex.Store({
       commit("addFavorite", movie);
     },
     removeFavorite({ commit }, movie) {
-      console.log('removing', movie)
       commit("removeFavorite", movie);
     }
   }
