@@ -32,11 +32,9 @@ export default {
     methods: {
         ...mapActions(['addFavorite', 'removeFavorite']),
         addToFavorites: function ( movie ) {
-            console.log('adding: ' + movie);
             this.addFavorite(movie);
         },
         removeFromFavorites: function ( movie ) {
-            console.log('removing: ' + movie);
             this.removeFavorite(movie);
         },
         isFavorite: function ( movie ) {
