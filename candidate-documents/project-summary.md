@@ -18,6 +18,9 @@ few words to answer, but you should not feel obliged to write a long essay.
 
 ## How did the project go for you?
 https://vue-test-utils.vuejs.org/guides/using-with-vuex.html
+https://codepen.io/ncerminara/pen/eFzJI/
+https://developer.mozilla.org/en-US/docs/Web/CSS/::before
+
 
 
 ## What are you especially proud of in this project?
