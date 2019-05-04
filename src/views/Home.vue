@@ -104,7 +104,7 @@ li {
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: -1;
     opacity: .1;
     background-repeat: no-repeat;
     background-position: 50% 0;
