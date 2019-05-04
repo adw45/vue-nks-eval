@@ -8,7 +8,12 @@
     </button>
     <span v-else>
         Favorite!
-        <a @click="true" class="remove_favorite">(UnFavorite)</a>
+        <a
+            @click="removeFromFavorites(movie)"
+            class="remove_favorite"
+        >
+            (UnFavorite)
+        </a>
     </span>
 </template>
 
@@ -25,10 +30,14 @@ export default {
         favorites: state => state.favorites
     }),
     methods: {
-        ...mapActions(['addFavorite']),
+        ...mapActions(['addFavorite', 'removeFavorite']),
         addToFavorites: function ( movie ) {
             console.log('adding: ' + movie);
             this.addFavorite(movie);
+        },
+        removeFromFavorites: function ( movie ) {
+            console.log('removing: ' + movie);
+            this.removeFavorite(movie);
         },
         isFavorite: function ( movie ) {
             return this.favorites.filter(fave => fave.id == movie.id).length > 0;
