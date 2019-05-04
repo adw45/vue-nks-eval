@@ -6,7 +6,7 @@
     >
         Add to favorites
     </button>
-    <span v-else>
+    <span v-else class="remove-favorite-header">
         Favorite!
         <a
             @click="removeFromFavorites(movie)"
@@ -45,5 +45,19 @@ export default {
 </script>
 
 <style scoped>
-
+.favorite {
+  background-color: #6395ED;
+  color: white;
+  border-radius: 0px;
+  font-size: 20px;
+  width: 160px;
+}
+.remove-favorite-header {
+  font-weight: 700;
+  padding-right: 15px;
+}
+.remove_favorite {
+  font-weight: 500;
+  font-size: 12px;
+}
 </style>
