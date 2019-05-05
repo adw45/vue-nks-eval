@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     movies: movies,
     favorites: [],
-    filteredGenres: {}
+    filteredGenres: []
   },
   mutations: {
     addFavorite(state, movie) {
@@ -21,13 +21,15 @@ export default new Vuex.Store({
       );
     },
     addGenreFilter(state, genre) {
-      state.filteredGenres = {
-        ...state.filteredGenres,
-        [genre]: true
-      };
+      if (!state.filteredGenres.includes(genre)) {
+        state.filteredGenres.push(genre);
+      }
     },
     removeGenreFilter(state, genre) {
-      state.filteredGenres = delete state.filteredGenres[genre];
+      let index = state.filteredGenres.indexOf(genre);
+      if (index > -1) {
+        state.filteredGenres.splice(index, 1);
+      }
     }
   },
   actions: {

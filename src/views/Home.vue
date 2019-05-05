@@ -3,8 +3,8 @@
         <h1>Movie List!</h1>
         <p>These were the top-rated films of the 20th Century.</p>
 
-        <p v-if="Object.keys(filteredGenres).length > 0">
-          <span class="genre" v-for="genre in Object.keys(filteredGenres)" @click="removeGenreFilter(genre)">
+        <p v-if="filteredGenres.length > 0">
+          <span class="genre" v-for="genre in filteredGenres" @click="removeGenreFilter(genre)">
             <span class="remove">&#10006;</span> {{genre}}
           </span>
           </br>
@@ -61,9 +61,9 @@ export default {
     computed: mapState({
       movies: state => state.movies.results,
       filteredMovies: (state) => {
-        if (Object.keys(state.filteredGenres).length > 0) {
+        if (state.filteredGenres.length > 0) {
           return state.movies.results.filter((movie) => {
-            return movie.genres.filter(genre => Object.keys(state.filteredGenres).includes(genre)).length > 0;
+            return movie.genres.filter(genre => state.filteredGenres.includes(genre)).length > 0;
           });
         }
         return state.movies.results;
