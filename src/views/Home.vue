@@ -3,8 +3,24 @@
         <h1>Movie List!</h1>
         <p>These were the top-rated films of the 20th Century.</p>
 
+        <p v-if="Object.keys(filteredGenres).length > 0">
+          <span class="genre" v-for="genre in Object.keys(filteredGenres)" @click="removeGenreFilter(genre)">
+            <span class="remove">&#10006;</span> {{genre}}
+          </span>
+          </br>
+          <span class="filter-note">
+            Showing {{filteredMovies.length}} of {{movies.length}} movies.
+          </span>
+        </p>
+        <p v-else>
+          Click on a movie's genre to filter.
+        </p>
+
         <ul class="movie-list">
-          <li v-for="movie in movies.results" class="grid-container">
+          <li
+            v-for="movie in filteredMovies"
+            class="grid-container"
+          >
             <div class="poster">
                 <img :src="movie.poster_path" />
             </div>
@@ -14,9 +30,7 @@
                 class="movie-details-background"></div>
               <h2>{{movie.title}} ({{movie.release_date | parseYear}})</h2>
               <div>
-                <span v-for="genre in movie.genres" class="genre">
-                  {{genre}}
-                </span>
+                <Genre v-for="genre in movie.genres" :genre="genre"/>
               </div>
               <p>
                 {{movie.overview}}
@@ -35,19 +49,36 @@
 <script>
 // @ is an alias to /src
 import FavoriteButton from "@/components/FavoriteButton.vue";
+import Genre from "@/components/Genre.vue";
 import { mapState, mapActions } from 'vuex';
 
 export default {
     name: "home",
     components: {
-        FavoriteButton
+        FavoriteButton,
+        Genre
     },
     computed: mapState({
-        movies: state => state.movies,
+      movies: state => state.movies.results,
+      filteredMovies: (state) => {
+        if (Object.keys(state.filteredGenres).length > 0) {
+          return state.movies.results.filter((movie) => {
+            return movie.genres.filter(genre => Object.keys(state.filteredGenres).includes(genre)).length > 0;
+          });
+        }
+        return state.movies.results;
+      },
+      filteredGenres: state => state.filteredGenres
     }),
+    methods: {
+      ...mapActions(['removeGenreFilter']),
+      clearGenreFilter: function ( genre ) {
+        this.removeGenreFilter(genre);
+      }
+    },
     filters: {
         parseYear: (releaseDate) => {
-            return new Date(releaseDate).getFullYear();
+          return new Date(releaseDate).getFullYear();
         }
     }
 };
@@ -113,5 +144,12 @@ li {
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
+}
+.remove {
+  color: red;
+  font-size: 14px;
+}
+.filter-note {
+  font-size: 12px;
 }
 </style>

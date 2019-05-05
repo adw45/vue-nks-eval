@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     movies: movies,
-    favorites: []
+    favorites: [],
+    filteredGenres: {}
   },
   mutations: {
     addFavorite(state, movie) {
@@ -18,6 +19,15 @@ export default new Vuex.Store({
       state.favorites = state.favorites.filter(
         tempMovie => tempMovie.id !== movie.id
       );
+    },
+    addGenreFilter(state, genre) {
+      state.filteredGenres = {
+        ...state.filteredGenres,
+        [genre]: true
+      };
+    },
+    removeGenreFilter(state, genre) {
+      state.filteredGenres = delete state.filteredGenres[genre];
     }
   },
   actions: {
@@ -26,6 +36,12 @@ export default new Vuex.Store({
     },
     removeFavorite({ commit }, movie) {
       commit("removeFavorite", movie);
+    },
+    addGenreFilter({ commit }, genre) {
+      commit("addGenreFilter", genre);
+    },
+    removeGenreFilter({ commit }, genre) {
+      commit("removeGenreFilter", genre);
     }
   }
 });
